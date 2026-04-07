@@ -32,13 +32,25 @@ function App() {
       return;
     }
 
+    // Add timeout to prevent infinite loading
+    const timeoutId = setTimeout(() => {
+      clearToken();
+      setUser(null);
+      setLoading(false);
+    }, 5000); // 5 second timeout
+
     fetchProfile()
-      .then((data) => setUser(data.user))
+      .then((data) => {
+        clearTimeout(timeoutId);
+        setUser(data.user);
+        setLoading(false);
+      })
       .catch(() => {
+        clearTimeout(timeoutId);
         clearToken();
         setUser(null);
-      })
-      .finally(() => setLoading(false));
+        setLoading(false);
+      });
   }, []);
 
   const handleLogout = () => {
