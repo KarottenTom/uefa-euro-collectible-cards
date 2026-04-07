@@ -32,12 +32,12 @@ function App() {
       return;
     }
 
-    // Add timeout to prevent infinite loading
+    // Add timeout to prevent infinite loading (3 seconds for session check)
     const timeoutId = setTimeout(() => {
       clearToken();
       setUser(null);
       setLoading(false);
-    }, 5000); // 5 second timeout
+    }, 3000);
 
     fetchProfile()
       .then((data) => {
