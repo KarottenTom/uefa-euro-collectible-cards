@@ -3575,17 +3575,6 @@
     "glitterImage": "https://api.sportsdata.io/v3/soccer/images/players/damian-szymanski.jpg"
   },
   {
-    "id": 326,
-    "name": "Jakub Kaluzinski",
-    "nation": "Poland",
-    "type": "player",
-    "position": "Defensive Midfield",
-    "age": 21,
-    "club": "Antalyaspor",
-    "normalImage": "https://api.sportsdata.io/v3/soccer/images/players/jakub-kaluzinski.jpg",
-    "glitterImage": "https://api.sportsdata.io/v3/soccer/images/players/jakub-kaluzinski.jpg"
-  },
-  {
     "id": 327,
     "name": "Taras Romanczuk",
     "nation": "Poland",

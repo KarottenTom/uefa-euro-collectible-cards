@@ -61,10 +61,22 @@ const cleanupCoachesAndFlags = async () => {
   }
 };
 
+const cleanupInvalidPlayers = async () => {
+  try {
+    // Remove Jakub Kaluzinski (ID 326) - was not on Poland official squad
+    await run('DELETE FROM collections WHERE cardId = 326');
+    await run('DELETE FROM cards WHERE id = 326');
+    console.log('✓ Invalid players removed!');
+  } catch (error) {
+    console.error('Error removing invalid players:', error);
+  }
+};
+
 async function seedDatabase() {
   await seedAdmin();
   await seedCards();
   await cleanupCoachesAndFlags();
+  await cleanupInvalidPlayers();
 }
 
 module.exports = seedDatabase;
