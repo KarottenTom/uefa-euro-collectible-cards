@@ -1,21 +1,21 @@
 {
-    "experimentalServices": {
-        "frontend": {
-            "entrypoint": "frontend",
-            "routePrefix": "/",
-            "framework": "vite"
-        },
-        "backend": {
-            "entrypoint": "backend",
-            "routePrefix": "/_/backend"
-        }
-    },
+    "version": 2,
+    "builds": [
+        { "src": "frontend/package.json", "use": "@vercel/static-build" },
+        { "src": "backend/server.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+        { "src": "/api/(.*)", "dest": "/backend/server.js" },
+        { "src": "/(.*)", "dest": "/frontend/$1" }
+    ],
     "env": {
         "JWT_SECRET": "supersecretkey",
-        "ADMIN_EMAIL": "admin@eurocards.local",
+        "ADMIN_EMAIL": "admin@eurocards.local", 
         "ADMIN_PASSWORD": "Admin2024!",
         "DATABASE_FILE": "./database.sqlite",
-        "FRONTEND_URL": "https://uefa-euro-collectible-cards.vercel.app"
+        "FRONTEND_URL": "https://uefa-euro-collectible-cards.vercel.app",
+        "NODE_ENV": "production"
     }
 }
+
 
