@@ -10,39 +10,6 @@ export default function PackOpening() {
   const [flipped, setFlipped] = useState({});
   const SHINY_PERCENTAGE = 7.5;
 
-  // Map nations to flag image URLs
-  const getFlagImage = (nation) => {
-    const flagMap = {
-      'Germany': 'https://flagcdn.com/de.svg',
-      'France': 'https://flagcdn.com/fr.svg',
-      'Spain': 'https://flagcdn.com/es.svg',
-      'Italy': 'https://flagcdn.com/it.svg',
-      'Netherlands': 'https://flagcdn.com/nl.svg',
-      'Portugal': 'https://flagcdn.com/pt.svg',
-      'England': 'https://flagcdn.com/gb-eng.svg',
-      'Belgium': 'https://flagcdn.com/be.svg',
-      'Austria': 'https://flagcdn.com/at.svg',
-      'Czech Republic': 'https://flagcdn.com/cz.svg',
-      'Denmark': 'https://flagcdn.com/dk.svg',
-      'Hungary': 'https://flagcdn.com/hu.svg',
-      'Poland': 'https://flagcdn.com/pl.svg',
-      'Romania': 'https://flagcdn.com/ro.svg',
-      'Slovakia': 'https://flagcdn.com/sk.svg',
-      'Slovenia': 'https://flagcdn.com/si.svg',
-      'Greece': 'https://flagcdn.com/gr.svg',
-      'Türkiye': 'https://flagcdn.com/tr.svg',
-      'Georgia': 'https://flagcdn.com/ge.svg',
-      'Ukraine': 'https://flagcdn.com/ua.svg',
-      'Scotland': 'https://flagcdn.com/gb-sct.svg',
-      'Switzerland': 'https://flagcdn.com/ch.svg',
-      'Turkey': 'https://flagcdn.com/tr.svg',
-      'Serbia': 'https://flagcdn.com/rs.svg',
-      'Albania': 'https://flagcdn.com/al.svg',
-      'Croatia': 'https://flagcdn.com/hr.svg',
-    };
-    return flagMap[nation] || 'https://flagcdn.com/un.svg'; // UN flag as fallback
-  };
-
   const handleOpenPack = async () => {
     setError('');
     setLoading(true);
@@ -143,7 +110,6 @@ export default function PackOpening() {
               const displayName = card.type === 'coach' || card.type === 'flag' ? card.name.toUpperCase() : card.name;
               const isShiny = card.variant === 'glitter' || card.variant === 'shiny';
               const isCardFlipped = flipped[index] || false;
-              const flagImage = getFlagImage(card.nation);
               
               return (
                 <div 
@@ -153,14 +119,8 @@ export default function PackOpening() {
                   onClick={() => handleCardClick(index)}
                 >
                   <div className={`card-flip-container ${isCardFlipped ? 'flipped' : ''}`}>
-                    {/* Back side - Flag */}
-                    <div className="card-back">
-                      <img 
-                        className="card-flag" 
-                        src={flagImage} 
-                        alt={card.nation}
-                      />
-                    </div>
+                    {/* Back side - Spiellogo */}
+                    <div className="card-back" />
                     
                     {/* Front side - Player */}
                     <div className="card-front">
