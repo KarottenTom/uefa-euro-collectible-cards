@@ -15,14 +15,21 @@ const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 // Allow all origins for Vercel deployment
 app.use(cors({ 
-  origin: [
-    'http://localhost:5173',
-    'https://uefa-euro-collectible-cards.vercel.app',
-    frontendUrl
-  ], 
-  credentials: true 
+  origin: '*',
+  credentials: false
 }));
 app.use(express.json());
+
+// Add response headers for API
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 app.use('/api', authRoutes);
 app.use('/api', cardRoutes);
