@@ -6,17 +6,29 @@ const getAuthHeaders = () => {
 };
 
 const request = async (path, options = {}) => {
-  const response = await fetch(`${API_BASE}${path}`, {
+  const timeoutPromise = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('Request timeout after 30 seconds')), 30000)
+  );
+
+  const fetchPromise = fetch(`${API_BASE}${path}`, {
     headers: { 'Content-Type': 'application/json', ...getAuthHeaders(), ...options.headers },
     ...options,
     body: options.body ? JSON.stringify(options.body) : undefined
   });
 
-  const payload = await response.json().catch(() => null);
-  if (!response.ok) {
-    throw new Error(payload?.error || 'Request failed');
+  try {
+    const response = await Promise.race([fetchPromise, timeoutPromise]);
+    const payload = await response.json().catch(() => null);
+    if (!response.ok) {
+      throw new Error(payload?.error || 'Request failed');
+    }
+    return payload;
+  } catch (error) {
+    if (error.message.includes('timeout')) {
+      throw new Error('Server is not responding. Please try again later.');
+    }
+    throw error;
   }
-  return payload;
 };
 
 export const register = (email, username, password) => request('/register', { method: 'POST', body: { email, username, password } });

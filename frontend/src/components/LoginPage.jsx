@@ -22,7 +22,12 @@ export default function LoginPage({ setUser }) {
       setUser(profile.user);
       navigate('/pack');
     } catch (err) {
-      setError(err.message);
+      const errorMsg = err.message || 'Login failed';
+      if (errorMsg.includes('Failed to fetch')) {
+        setError('Backend server not responding. Please try again in a moment.');
+      } else {
+        setError(errorMsg);
+      }
     } finally {
       setLoading(false);
     }
