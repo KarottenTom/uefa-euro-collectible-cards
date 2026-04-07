@@ -14,8 +14,10 @@ services:
       - key: ADMIN_PASSWORD
         value: Admin2024!
       - key: DATABASE_FILE
-        value: ./database.sqlite
+        value: /tmp/database.sqlite
       - key: FRONTEND_URL
         value: https://uefa-euro-collectible-cards.vercel.app
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: 10000
