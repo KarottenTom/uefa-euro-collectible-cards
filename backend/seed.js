@@ -46,9 +46,25 @@ const seedCards = async () => {
   console.log(`Seeded ${cardsData.length} collectible cards.`);
 };
 
+const cleanupCoachesAndFlags = async () => {
+  try {
+    // Delete coaches and flags from collections first (foreign key constraint)
+    await run('DELETE FROM collections WHERE cardId IN (SELECT id FROM cards WHERE type IN ("coach", "flag"))');
+    
+    // Delete coaches and flags from cards
+    const deleted = await run('DELETE FROM cards WHERE type IN ("coach", "flag")');
+    
+    const coachesFlags = await all('SELECT COUNT(*) as count FROM cards WHERE type IN ("coach", "flag")');
+    console.log('✓ Coaches and flags removed!');
+  } catch (error) {
+    console.error('Error removing coaches and flags:', error);
+  }
+};
+
 async function seedDatabase() {
   await seedAdmin();
   await seedCards();
+  await cleanupCoachesAndFlags();
 }
 
 module.exports = seedDatabase;
