@@ -19,7 +19,7 @@ router.get('/user/collection', requireAuth, async (req, res, next) => {
       `SELECT c.cardId, c.variant, c.count, cards.name, cards.nation, cards.position, cards.type, cards.normalImage, cards.glitterImage
        FROM collections c
        JOIN cards ON cards.id = c.cardId
-       WHERE c.userId = ?
+       WHERE c.userId = ? AND cards.type NOT IN ("coach", "flag")
        ORDER BY cards.type, cards.nation, cards.name`,
       [req.user.id]
     );
@@ -32,7 +32,7 @@ router.get('/user/collection', requireAuth, async (req, res, next) => {
 router.post('/user/addCard', requireAuth, async (req, res, next) => {
   try {
     const { cardId, variant } = req.body;
-    const card = await get('SELECT id FROM cards WHERE id = ?', [cardId]);
+    const card = await get('SELECT id FROM cards WHERE id = ? AND type NOT IN ("coach", "flag")', [cardId]);
     if (!card) {
       return res.status(404).json({ error: 'Card not found.' });
     }
@@ -52,7 +52,7 @@ router.post('/user/addCard', requireAuth, async (req, res, next) => {
 
 router.post('/user/openPack', requireAuth, async (req, res, next) => {
   try {
-    const cards = await all('SELECT * FROM cards');
+    const cards = await all('SELECT * FROM cards WHERE type NOT IN ("coach", "flag")');
     if (cards.length === 0) {
       return res.status(400).json({ error: 'No cards available.' });
     }
