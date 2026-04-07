@@ -13,7 +13,15 @@ const app = express();
 const port = process.env.PORT || 4000;
 const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
 
-app.use(cors({ origin: frontendUrl, credentials: true }));
+// Allow all origins for Vercel deployment
+app.use(cors({ 
+  origin: [
+    'http://localhost:5173',
+    'https://uefa-euro-collectible-cards.vercel.app',
+    frontendUrl
+  ], 
+  credentials: true 
+}));
 app.use(express.json());
 
 app.use('/api', authRoutes);
@@ -33,7 +41,7 @@ app.use((err, req, res, next) => {
 (async () => {
   await initDb();
   await require('./seed')();
-  app.listen(port, () => {
-    console.log(`Backend listening on http://localhost:${port}`);
+  app.listen(port, '0.0.0.0', () => {
+    console.log(`Backend listening on http://0.0.0.0:${port}`);
   });
 })();

@@ -9,5 +9,13 @@
             "entrypoint": "backend",
             "routePrefix": "/_/backend"
         }
+    },
+    "env": {
+        "JWT_SECRET": "supersecretkey",
+        "ADMIN_EMAIL": "admin@eurocards.local",
+        "ADMIN_PASSWORD": "Admin2024!",
+        "DATABASE_FILE": "./database.sqlite",
+        "FRONTEND_URL": "https://uefa-euro-collectible-cards.vercel.app"
     }
 }
+
