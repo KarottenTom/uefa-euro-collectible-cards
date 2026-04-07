@@ -39,9 +39,20 @@ app.use((err, req, res, next) => {
 });
 
 (async () => {
-  await initDb();
-  await require('./seed')();
-  app.listen(port, '0.0.0.0', () => {
-    console.log(`Backend listening on http://0.0.0.0:${port}`);
-  });
+  try {
+    console.log('Initializing database...');
+    await initDb();
+    console.log('Database initialized');
+    
+    console.log('Running seed...');
+    await require('./seed')();
+    console.log('Seed completed');
+    
+    app.listen(port, '0.0.0.0', () => {
+      console.log(`Backend listening on http://0.0.0.0:${port}`);
+    });
+  } catch (error) {
+    console.error('Fatal startup error:', error);
+    process.exit(1);
+  }
 })();
