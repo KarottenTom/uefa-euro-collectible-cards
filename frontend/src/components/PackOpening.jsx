@@ -40,10 +40,10 @@ export default function PackOpening() {
 
   useEffect(() => {
     if (isOpening && pack.length > 0) {
-      // Animation completes after 2.5 seconds
+      // Animation completes after 1.8 seconds (optimized for tablets)
       const timer = setTimeout(() => {
         setIsOpening(false);
-      }, 2500);
+      }, 1800);
       return () => clearTimeout(timer);
     }
   }, [isOpening, pack]);
