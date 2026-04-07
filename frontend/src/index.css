@@ -1,0 +1,252 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #061021;
+  color: #f4f7ff;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  min-height: 100%;
+  margin: 0;
+  background: radial-gradient(circle at top, rgba(54, 84, 164, 0.22), transparent 35%),
+    linear-gradient(180deg, #061021 0%, #020612 100%);
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.page-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+}
+
+.card-panel {
+  background: rgba(12, 20, 44, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 24px;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.title-1 {
+  font-size: clamp(1.8rem, 2.2vw, 2.4rem);
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+input, select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(14, 24, 60, 0.95);
+  color: #f8fbff;
+}
+
+input:focus, select:focus, button:focus {
+  outline: 2px solid rgba(83, 154, 255, 0.45);
+}
+
+button.primary {
+  border: none;
+  background: linear-gradient(135deg, #577bf0 0%, #a778ff 100%);
+  color: #000000;
+  padding: 14px 22px;
+  border-radius: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(95, 94, 255, 0.22);
+}
+
+button.secondary {
+  border: 1px solid rgba(255,255,255,0.14);
+  background: transparent;
+  color: #e3e9ff;
+  padding: 12px 18px;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(2, 4, 16, 0.94);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.nav-link {
+  color: #d8e1ff;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.card-grid.pack-grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.card-item {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(9, 16, 41, 0.78), rgba(2, 4, 16, 0.96));
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.25);
+}
+
+.card-image {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.03) brightness(0.95);
+  background: linear-gradient(180deg, #111a3a 0%, #0f1333 100%);
+}
+
+.card-meta {
+  padding: 16px;
+}
+
+.card-meta h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.card-meta p {
+  margin: 4px 0;
+  font-size: 0.96rem;
+  color: #b2c1ff;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  background: rgba(255,255,255,0.08);
+  color: #1a1a2e;
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 160%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  background: rgba(24, 45, 94, 0.95);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.alert {
+  background: rgba(88, 52, 183, 0.12);
+  border: 1px solid rgba(123, 95, 255, 0.18);
+  color: #d6deff;
+  padding: 16px;
+  border-radius: 18px;
+}
+
+.loader {
+  min-height: 260px;
+  display: grid;
+  place-items: center;
+  color: #aeb9ff;
+}
+
+@media (max-width: 800px) {
+  .page-container {
+    padding: 16px 16px 60px;
+  }
+
+  .navbar {
+    justify-content: center;
+  }
+}
