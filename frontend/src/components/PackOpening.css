@@ -304,7 +304,7 @@
 /* Card Reveal Animation */
 .card-grid.reveal-animation {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
   animation: fadeIn 0.5s ease-in;
   padding: 16px;
@@ -540,6 +540,10 @@
   .card-front .card-meta {
     padding: 10px;
     gap: 6px;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 

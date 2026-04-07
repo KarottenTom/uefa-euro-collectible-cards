@@ -249,4 +249,44 @@ button.secondary {
   .navbar {
     justify-content: center;
   }
+
+  /* Tablet: 2 columns */
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .card-grid.pack-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mobile: 1 column */
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .card-grid.pack-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-item {
+    border-radius: 16px;
+  }
+
+  .card-meta {
+    padding: 12px;
+  }
+
+  .card-meta h3 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .card-meta p {
+    font-size: 0.9rem;
+    margin: 2px 0;
+  }
 }
